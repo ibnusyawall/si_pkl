@@ -1,0 +1,31 @@
+<?php
+
+namespace App\Http\Controllers\API;
+
+use Illuminate\Http\Request;
+use App\Http\Controllers\API\BaseController as BaseController;
+use App\Sekolah;
+
+class SekolahController extends BaseController
+{
+    public function getAll()
+    {
+        $data = Sekolah::all();
+        return $this->sendResponseJson($data, 'retrive all data success.');
+    }
+    public function getByNpsn(Request $request)
+    {
+        if (empty($request->npsn)) {
+            return $this->sendErrorJson("npsn don't be empty.", []);
+        }
+
+        $data = Sekolah::where('npsn', $request->npsn)->first();
+        $message = !empty($data) ? 'retrive data success' : "npsn can't find.";
+        return $this->sendResponseJson($data, $message);
+    }
+
+    public function store()
+    {
+         
+    }
+}

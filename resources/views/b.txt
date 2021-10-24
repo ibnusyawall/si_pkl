@@ -1,0 +1,4 @@
+{{--@else
+          <h3 class="text-center" style="margin-bottom: 30px; justify-content: center; padding-top: 350px;">Kamu Seda>
+              <b> {{ Request::url() }} </b>
+          <h3>--}}

@@ -1,0 +1,66 @@
+{
+	"type": "SocialMediaPosting",
+	"headline": "Yusuf Rahul - #sgbasknnKalo mau make emote ginian di sg make fitur...",
+	"identifier": "4270750489709077:6:0",
+	"author": {
+		"type": "Person",
+		"name": "Yusuf Rahul",
+		"identifier": 100003738632407,
+		"url": "https://www.facebook.com/yusuf.rahul.54",
+		"image": "https://scontent.fcgk9-1.fna.fbcdn.net/v/t1.6435-1/fr/cp0/e15/q65/159372898_2194281484039785_6243648952613814613_n.jpg?_nc_cat=105&ccb=1-5&_nc_sid=a12de3&efg=eyJpIjoiYiJ9&_nc_eui2=AeGAA0jj78YqkAQxFWVTyKP6u8tMnmy3x1m7y0yebLfHWQjl5XyaxpvexBWUzxz-7rJ3VhqYIePNkxj4P20-Ux7Z&_nc_ohc=vG786wRjvosAX8lz8zc&_nc_ht=scontent.fcgk9-1.fna&oh=0f5cf876857b529a4e2cc7053cfecd89&oe=6163D218",
+		"sameAs": null
+	},
+	"dateCreated": "2021-09-13T19:48:19-0700",
+	"dateModified": "2021-09-13T19:58:56-0700",
+	"articleBody": "#sgbasknnKalo mau make emote ginian di sg make fitur yang mana ya? Android bisa kah?",
+	"interactionStatistic": [
+		{
+			"type": "InteractionCounter",
+			"interactionType": "https://schema.org/CommentAction",
+			"userInteractionCount": 2
+		},
+		{
+			"type": "InteractionCounter",
+			"interactionType": "http://schema.org/LikeAction",
+			"userInteractionCount": 2
+		},
+		{
+			"type": "InteractionCounter",
+			"interactionType": "http://schema.org/ShareAction",
+			"userInteractionCount": 0
+		}
+	],
+	"commentCount": 2,
+	"comment": [
+		{
+			"type": "Comment",
+			"identifier": "4270755479708578",
+			"dateCreated": "2021-09-13T19:50:36-0700",
+			"text": "Klo di ios udh langsung ada di emoji, kala andro kurang tau",
+			"mentions": null,
+			"author": {
+				"type": "Person",
+				"name": "Andhita Pratama",
+				"url": "https://www.facebook.com/AndhitaPratamaaa",
+				"identifier": "100005283397456"
+			}
+		}
+	],
+	"image": [
+		{
+			"type": "ImageObject",
+			"width": 575,
+			"contentUrl": "https://scontent.fcgk9-2.fna.fbcdn.net/v/t1.6435-9/fr/cp0/e15/q65/241743403_2390167001117898_5581809381268900754_n.jpg?_nc_cat=106&ccb=1-5&_nc_sid=ca434c&efg=eyJpIjoiYiJ9&_nc_eui2=AeHL_fgB169s5gd6cI4pMi_dlgK9aXfKPI6WAr1pd8o8jgO_pWynLh7rFUuCeUFJ6a281skhsaNLvHL7J48A4DKH&_nc_ohc=3YLlIfp5iHcAX_o1GmN&_nc_ht=scontent.fcgk9-2.fna&oh=c0ee2000ef9fadc9eb2b460079c3599a&oe=6166310B",
+			"caption": "#sgbasknnKalo mau make emote ginian di sg make fitur yang mana ya? Android bisa kah?"
+		}
+	],
+	"url": "https://www.facebook.com/groups/sharinggilsblog.id/permalink/4270750489709077/",
+	"isPartOf": "https://www.facebook.com/groups/sharinggilsblog.id/",
+	"sharedContent": [
+		{
+			"type": "CreativeWork",
+			"url": "https://www.facebook.com/hashtag/sgbask"
+		}
+	],
+	"context": "https://schema.org"
+}
