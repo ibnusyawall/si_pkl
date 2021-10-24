@@ -63,6 +63,7 @@
                                             {{ vs.jurusan }}
                                         </td>
                                         <td>
+                                        
                                             <button v-if="!!status.length"
                                                 :class="status.filter(s => s.id == vs.user_id)[0].status == 'verified' ? 'btn btn-outline-success btn-sm' : 'btn btn-outline-danger btn-sm'"
                                             > {{ status.filter(s => s.id == vs.user_id)[0].status }}
@@ -238,7 +239,8 @@
             </div>
         </div>-->
         <pre id="debug">
-sekolah: {{ sekolah }}
+sekolah: {{ sekolah }}<br>
+status: {{ status }}
 <!--npsnCollect: {{ npsnCollect }}<br>
 data sekolah: {{ sekolah }}-->
         </pre>
@@ -274,6 +276,9 @@ data sekolah: {{ sekolah }}-->
                 hapusBulk: {
                     id: null,
                     nama: null,
+                },
+                env: {
+                    TIME: { hours: new Date().getHours(), },
                 },
                 status: [],
                 errorTab: [],
@@ -328,7 +333,8 @@ data sekolah: {{ sekolah }}-->
                                     data.map( async ({ nis }) => {
                                         try {
                                             let status = await axios.get(`/api/v1/siswa/${nis}`)
-                                            !!status ? this.status.push({...status}) : {}
+                                            
+                                            !!status ? this.status.push({...status.data?.data.user }) : console.log(status)
                                         } catch (e) {
                                             this.logger('error', e)
                                         }
@@ -362,6 +368,7 @@ data sekolah: {{ sekolah }}-->
                         this.bulkAccount = [...response.filter(v => v.status == 'unverified')]
                     }).catch(e => console.log(e))*/
             },
+
             submit() {
                 console.log(this.user)
                 var id = this.randomInt(10, 100)
@@ -370,9 +377,43 @@ data sekolah: {{ sekolah }}-->
                 console.log('id', id)
                 this.handleSubmit()
             },
+
             handleSubmit() {
                 this.submitUser()
             },
+
+            submitUser() {
+                var name = this.user.name.length > 1 ?
+                    `${this.user.name.split` `[0]} ${this.user.name.split(/\ +|\-/g).slice(1).map(v => v.charAt(0)).join` `}` : 
+                    this.user.name
+
+                axios.post('/api/v2/user/tambah', {
+                    name: name,
+                    email: this.user.email,
+                    password: this.user.pass
+                }).then(res => {
+                    //this.$router.push({ name: 'login', query: { registered: true } })
+                    this.sendEmailVerif()                    
+                    this.submitSiswa()
+                    console.log(res?.data)
+                }).catch(e => {
+                     this.errorTab.push({ email: 'email sudah pernah digunakan.' })
+                     console.log(e)
+                })
+            },
+
+            submitSiswa() {
+                axios.post('/api/v2/siswa/tambah', {
+                    nis: this.user.nis,
+                    nama_lengkap: this.user.name,
+                    jurusan: this.user.jurusan,
+                    jenis_kelamin: this.user.jenis_kelamin,
+                    sekolah_id: this.user.sekolah_id
+                }).then(res => {
+                    console.log(res?.data)
+                }).catch(e => console.log(e))
+            },
+
             pushToSekolah(sekolah_id, id) {
                 var i = this.sekolah.findIndex(v => v.id == sekolah_id)
                 this.sekolah[i]?.data.push({
@@ -384,6 +425,7 @@ data sekolah: {{ sekolah }}-->
                     jurusan: this.user.jurusan,
                 })
             },
+
             pushToStatus(id) {
                 this.status.push({
                     id: id,
@@ -393,6 +435,7 @@ data sekolah: {{ sekolah }}-->
                     status: 'verified'
                 })
             },
+
             sendEmailVerif() {
                 let { protocol, host } = window.location
 
@@ -415,6 +458,7 @@ data sekolah: {{ sekolah }}-->
                     tamplate_id: 'sipkl_tconfirmations',
                 }
 
+                
                 try {
                     var sendEmail = EmailJs.send(opts.service_id, opts.tamplate_id, { ...params }, this.token)
                     console.log('Oke', sendEmail)
@@ -422,76 +466,14 @@ data sekolah: {{ sekolah }}-->
                     console.log('Error', e)
                 }
             },
-            async submitUser() {
-                var name = this.user.name.length > 1 ?
-                    `${this.user.name.split` `[0]} ${this.user.name.split(/\ +|\-/g).slice(1).map(v => v.charAt(0)).join` `}` :
-                    this.user.name
 
-                var data = {
-                    name: name,
-                    email: this.user.email,
-                    password: this.user.pass,
-                    status: 'verified'
-                }
 
-                try {
-                    let add_user = await axios.post('/api/v2/user/tambah', { ...data })
-                } catch (e) {
-                    this.logger('error', e)
-                    this.errorTab.push({ email: 'email sudah pernah digunakan.' })
-                    this.$toasted.global.error({ message: 'Data gagal ditambahkan.' })
-
-                    // kosongkan form
-                    await this.emptyFormUser()
-                } finally {
-                    this.$toasted.global.success({ message: 'Data berhasil ditambahkan.' })
-
-                    // kirim email verifikasi ke user
-                    await this.sendEmailVerif()
-
-                    // kosongkan form
-                    await this.emptyFormUser()
-
-                    // lanjutkan ke submit siswa
-                    await this.submitSiswa()
-                }
-
-                /*axios.post('/api/v2/user/tambah', {
-                    name: name,
-                    email: this.user.email,
-                    password: this.user.pass,
-                    status: 'verified'
-                }).then(res => {
-                    this.$toasted.global.success({ message: 'Data berhasil ditambahkan.' })
-                    this.emptyFormUser()
-                    this.sendEmailVerif()
-                    this.submitSiswa()
-                    console.log(res?.data)
-                }).catch(e => {
-                     this.errorTab.push({ email: 'email sudah pernah digunakan.' })
-                     console.log(e)
-                })*/                
-            },
-
-            async submitSiswa() {
-                
-                axios.post('/api/v2/siswa/tambah', {
-                    nis: this.user.nis,
-                    nama_lengkap: this.user.name,
-                    jurusan: this.user.jurusan,
-                    jenis_kelamin: this.user.jenis_kelamin,
-                    sekolah_id: this.user.sekolah_id
-                }).then(res => {
-                    this.emptyFormSiswa()
-                    console.log(res?.data)
-                }).catch(e => console.log(e))
-            },
-            emptyFormUser() {
+            async emptyFormUser() {
                 this.user.name = null
                 this.user.email = null
                 this.user.pass = null
             },
-            emptyFormSiswa() {
+            async emptyFormSiswa() {
                 this.user.nis = null
                 this.user.name = null
                 this.user.jurusan = null
@@ -568,6 +550,7 @@ data sekolah: {{ sekolah }}-->
             },
             refresh() {
                 this.getSekolah()
+                this.getBulk()
             },
             LS(v = {}) {
                 switch (v?.action){
