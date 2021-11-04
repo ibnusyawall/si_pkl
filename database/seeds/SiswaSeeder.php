@@ -60,6 +60,14 @@ class SiswaSeeder extends Seeder
                 'user_id' => 6,
                 'jurusan' => 'DKV'
             ],
+            [
+                'nis' => '192010210',
+                'nama_lengkap' => 'Erik Herdiansyah',
+                'jenis_kelamin' => 'laki-laki',
+                'sekolah_id' => '123456789',
+                'user_id' => 7,
+                'jurusan' => 'DKV'
+            ],
         ];
 
         foreach($siswa as $s) {

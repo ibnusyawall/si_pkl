@@ -17,9 +17,7 @@ import BootstrapVue from 'bootstrap-vue/dist/bootstrap-vue.esm'
 
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 import 'material-icons/iconfont/material-icons.css'
-//import 'bootstrap/dist/css/bootstrap.css'
 
-//import Bars from 'vuebars'
 import Chart from 'vue2-frappe'
 
 Vue.use(VueRouter)
@@ -41,27 +39,8 @@ window.axios.defaults.headers.common = {
     'Authorization': `Bearer ${localStorage.getItem('token')}`,
 }
 
-/*window.axios.interceptors.request.use((config) => {
-    Vue.$Progress.start()
-    return config
-}, (error) => {
-    Vue.$Progress.finish()
-    return Promise.reject(error)
-})
-
-window.axios.interceptors.response.use((response) => {
-    Vue.$Progress.start()
-    return response
-}, (error) => {
-    Vue.$Progress.finish()
-    return Promise.reject(error)
-})*/
-
 Vue.use(Vuelidate)
 Vue.use(BootstrapVue)
-
-//Vue.use(Bars)
-//Vus.use(Chart)
 
 Vue.config.productionTip = Vue.config.devtools = false
 
@@ -75,7 +54,6 @@ Vue.toasted.register('success', m => {
     icon: { name: 'check_circle_outline' },
     duration: defaultDuration,
     fitToScreen: true,
-//    fullWidth: true,
 })
 
 Vue.toasted.register('info', m => {
@@ -86,7 +64,6 @@ Vue.toasted.register('info', m => {
     icon: { name: 'highlight_off' },
     duration: defaultDuration,
     fitToScreen: true,
-//    fullWidth: true,
 })
 
 Vue.toasted.register('error', m => {
@@ -97,19 +74,7 @@ Vue.toasted.register('error', m => {
     icon: { name: 'error_outline' },
     duration: defaultDuration,
     fitToScreen: true,
-//    fullWidth: true,
 })
-
-/**
- * The following block of code may be used to automatically register your
- * Vue components. It will recursively scan this directory for the Vue
- * components and automatically register them with their "basename".
- *
- * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
- */
-
-// const files = require.context('./', true, /\.vue$/i)
-// files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
 import App from './components/App.vue'
 import Toc from './components/Toc'
@@ -124,12 +89,6 @@ import AddAbsen from './components/Dashboards/Siswa/AddAbsen'
 
 import ManageSekolah from './components/Dashboards/Admin/ManageSekolah'
 import ManageSiswa from './components/Dashboards/Admin/ManageSiswa'
-
-/**
- * Next, we will create a fresh Vue application instance and attach it to
- * the page. Then, you may begin adding components to this application
- * or customize the JavaScript scaffolding to fit your unique needs.
- */
 
 const router = new VueRouter({
     mode: 'history',

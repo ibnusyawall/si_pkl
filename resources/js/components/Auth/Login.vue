@@ -162,10 +162,11 @@
                                 window.location = this.$router.resolve({ name: 'dashboard-home' }).href
                         }
                     }).catch(e => {
-                        this.error.status = e.response.data.data.error
-                        this.error.status = this.error.status.split` `.map(v => v.charAt(0).toUpperCase() + v.slice(1)).join` `.replace('.', ' ')
+                     
+                        // this.error.status = e.response.data.data.error
+                        // this.error.status = this.error.status.split` `.map(v => v.charAt(0).toUpperCase() + v.slice(1)).join` `.replace('.', ' ')
                         this.$toasted.global.error({ message: 'Email dan password salah.' })
-                        console.log(e.response.data.data.error)
+                        console.log(e)
                     })
             },
 

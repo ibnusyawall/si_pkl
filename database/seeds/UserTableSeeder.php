@@ -54,6 +54,13 @@ class UserTableSeeder extends Seeder
                 'role' => 'siswa',
                 'status' => 'unverified',
             ],
+            [
+                'name' => 'erik',
+                'email' => 'erik@local.host',
+                'password' => bcrypt('erik'),
+                'role' => 'siswa',
+                'status' => 'verified',
+            ],
         ];
 
         foreach($user as $u) {
